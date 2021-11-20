@@ -2,16 +2,18 @@ package com.revature;
 
 import java.util.List;
 
-public abstract class EmployeeDao extends GenericDaoImp{
-    abstract void addEmployee(Employee employee);
+public interface EmployeeDao{
+    void addEmployee(Employee employee);
 
-    abstract void updateEmployee(Employee entity);
+    void updateEmployee(Employee entity);
 
-    abstract Employee findEmployeeById(String id);
+    Employee getEmployeeById(int id);
 
-    abstract void deleteEmployee(Employee entity);
+    Employee getEmployeeByCredentials(String email, String password);
 
-    abstract List<Employee> getAllEmployees();
+    boolean validEmployeeCredentials(String email, String password);
 
-    abstract void deleteAllEmployees();
+    void deleteEmployee(Employee entity);
+
+    List<Employee> getAllEmployees();
 }

@@ -1,12 +1,15 @@
 package com.revature;
 
+import com.fasterxml.classmate.AnnotationConfiguration;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-public class GenericDaoImp {
+import java.lang.annotation.Annotation;
+
+public class DaoHelperImp implements DaoHelper {
     private Session currentSession;
 
     private Transaction currentTransaction;
@@ -33,6 +36,10 @@ public class GenericDaoImp {
 
     private static SessionFactory getSessionFactory() {
         Configuration configuration = new Configuration().configure();
+        configuration.addAnnotatedClass(Employee.class);
+        configuration.addAnnotatedClass(Manager.class);
+        configuration.addAnnotatedClass(Request.class);
+        configuration.addAnnotatedClass(Receipt.class);
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties());
         SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());

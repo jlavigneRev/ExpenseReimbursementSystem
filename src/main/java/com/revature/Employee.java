@@ -10,20 +10,20 @@ public class Employee {
     @Column(name = "emp_id")
     private int empId;
 
-
     @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name= "first_name")
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
     private String lastName;
 
-    public Employee(){}
+    public Employee() {
+    }
 
     public Employee(int empId, String email, String password, String firstName, String lastName) {
         this.empId = empId;
@@ -71,5 +71,16 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "empId=" + empId +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }

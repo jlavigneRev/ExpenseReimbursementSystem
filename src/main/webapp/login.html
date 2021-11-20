@@ -39,6 +39,12 @@
             clear: both;
         }
 
+        #errorMsg{
+            color: red;
+            padding-top: 5px;
+            text-align: center;
+        }
+
         
     </style>
   </head>
@@ -51,11 +57,11 @@
 
                 <div class="wrapper">
                     <div>
-                        <h1 id="loginHeading">Login</h1>
+                        <h1 id="loginHeading">Project 1</h1>
                         <img id="logo" src="https://img.icons8.com/office/480/000000/money--v2.png" alt="logo">
                     </div>
                     
-                    <form id="loginForm">
+                    <form id="loginForm" action="loginValidation" method="post">
                         <div class="form-group">
                             <label for="">Email</label>
                             <input type="text" name="email" id="emailLoginInput" class="form-control">
@@ -63,11 +69,12 @@
 
                         <div class="form-group">
                             <label for="">Password</label>
-                            <input type="text" name="password" id="passwordLoginInput" class="form-control">
+                            <input type="password" name="password" id="passwordLoginInput" class="form-control">
                         </div>
 
                         <input type="submit" value="Login" class="btn btn-primary btn-block">
                     </form>
+                    <div id="errorMsg"></div>
                 </div>
 
             </div>
