@@ -30,10 +30,10 @@ public class ManagerDaoImp extends DaoHelperImp implements ManagerDao{
     @Override
     public Manager getManagerByCredentials(String email, String password) {
         Manager manager = null;
-        String hql="Select log.userId from Manager emp where emp.email=:email and emp.password=:password";
+        String hql="Select man.manId from Manager man where man.email=:email and man.password=:password";
         Query query = getCurrentSession().createQuery(hql);
-        query.setParameter(":userName", email);
-        query.setParameter(":password", password);
+        query.setParameter("email", email);
+        query.setParameter("password", password);
         List result = query.list();
         Iterator it = result.iterator();
         if(it.hasNext()){

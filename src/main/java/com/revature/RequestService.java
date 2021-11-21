@@ -36,4 +36,11 @@ public class RequestService {
         requestDao.closeCurrentSession();
         return requests;
     }
+
+    public List<Request> getRequestByEmployeeId(int id) {
+        requestDao.openCurrentSession();
+        List<Request> requests = requestDao.getRequestsByEmployeeId(id);
+        requestDao.closeCurrentSession();
+        return requests;
+    }
 }

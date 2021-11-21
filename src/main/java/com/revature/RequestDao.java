@@ -13,4 +13,6 @@ public interface RequestDao {
     void deleteRequest(Request entity);
 
     List<Request> getAllRequests();
+
+    List<Request> getRequestsByEmployeeId(int id);
 }

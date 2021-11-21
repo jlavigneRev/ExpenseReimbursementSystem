@@ -1,14 +1,23 @@
 package com.revature.servlets;
 
+import com.revature.Employee;
+import com.revature.JSHelper;
+import com.revature.Request;
+import com.revature.RequestService;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ManagerViewReqServlet extends HttpServlet {
-    public void doGet(HttpServletRequest request, HttpServletResponse response){
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
+        PrintWriter pw = response.getWriter();
         //check if logged in as manager
         HttpSession session = request.getSession();
         String email = (String) session.getAttribute("email");
@@ -18,8 +27,37 @@ public class ManagerViewReqServlet extends HttpServlet {
             //include html
             try {
                 request.getRequestDispatcher("/managerNavBar.html").include(request, response);
-                request.getRequestDispatcher("/managerLanding.html").include(request, response);
+                request.getRequestDispatcher("/managerViewRequest.html").include(request, response);
                 request.getRequestDispatcher("/footer.html").include(request, response);
+
+                //populate tables
+                RequestService requestService = new RequestService();
+                Employee currUser = (Employee) session.getAttribute("currUser");
+                List<Request> requestList = requestService.getAllRequest();
+                System.out.println(requestList);
+                ArrayList<String> lines;
+                pw.println("<script>");
+                for (Request req : requestList) {
+                    //add to all table
+                    lines = JSHelper.addToTableJS(req, "allTable", true);
+                    for (String line : lines) {
+                        pw.println(line);
+                    }
+                    if (req.isPending()) {
+                        //add to pending table
+                        lines = JSHelper.addToTableJS(req, "pendingTable", true);
+                        for (String line : lines) {
+                            pw.println(line);
+                        }
+                    } else {
+                        //add to fulfilled table
+                        lines = JSHelper.addToTableJS(req, "fulfilledTable", true);
+                        for (String line : lines) {
+                            pw.println(line);
+                        }
+                    }
+                }
+                pw.println("</script>");
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Error including html to managerViewReqServlet");

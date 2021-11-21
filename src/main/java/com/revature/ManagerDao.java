@@ -9,9 +9,9 @@ public interface ManagerDao {
 
     Manager getManagerById(int id);
 
-    public Manager getManagerByCredentials(String email, String password);
+    Manager getManagerByCredentials(String email, String password);
 
-    public boolean validManagerCredentials(String email, String password);
+    boolean validManagerCredentials(String email, String password);
 
     void deleteManager(Manager manager);
 

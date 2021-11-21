@@ -25,4 +25,9 @@ public class ReceiptDaoImp extends DaoHelperImp implements ReceiptDao{
         }
         return null;
     }
+
+    @Override
+    public void updateReceipt(Receipt receipt) {
+        getCurrentSession().update(receipt);
+    }
 }

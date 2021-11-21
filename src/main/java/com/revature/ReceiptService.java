@@ -22,4 +22,10 @@ public class ReceiptService {
         receiptDao.closeCurrentSession();
         return receipt;
     }
+
+    public void updateReceipt(Receipt receipt) {
+        receiptDao.openCurrentSessionwithTransaction();
+        receiptDao.updateReceipt(receipt);
+        receiptDao.closeCurrentSessionwithTransaction();
+    }
 }

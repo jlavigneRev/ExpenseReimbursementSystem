@@ -50,6 +50,16 @@
     <servlet-class>com.revature.servlets.ManagerViewReqServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>requestApproval</servlet-name>
+    <servlet-class>com.revature.servlets.RequestApprovalServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>receiptView</servlet-name>
+    <servlet-class>com.revature.servlets.ReceiptViewServlet</servlet-class>
+  </servlet>
+
 
 
   <servlet-mapping>
@@ -95,5 +105,15 @@
   <servlet-mapping>
     <servlet-name>managerViewRequest</servlet-name>
     <url-pattern>/managerViewRequest</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>receiptView</servlet-name>
+    <url-pattern>/receiptView</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>requestApproval</servlet-name>
+    <url-pattern>/requestApproval</url-pattern>
   </servlet-mapping>
 </web-app>

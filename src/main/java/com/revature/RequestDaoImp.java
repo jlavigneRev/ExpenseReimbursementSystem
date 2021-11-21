@@ -2,8 +2,11 @@ package com.revature;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class RequestDaoImp extends DaoHelperImp implements RequestDao{
@@ -34,6 +37,15 @@ public class RequestDaoImp extends DaoHelperImp implements RequestDao{
     @Override
     public List<Request> getAllRequests() {
         List<Request> requests = (List<Request>) getCurrentSession().createQuery("from Request").list();
+        return requests;
+    }
+
+    @Override
+    public List<Request> getRequestsByEmployeeId(int empId) {
+        String hql="from Request req where req.employee.empId=:empId";
+        Query query = getCurrentSession().createQuery(hql);
+        query.setParameter("empId", empId);
+        List<Request> requests = (List<Request>) query.list();
         return requests;
     }
 }
