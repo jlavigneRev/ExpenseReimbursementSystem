@@ -16,13 +16,16 @@ public class LoginServlet extends HttpServlet {
         try {
             request.getRequestDispatcher("/login.html").include(request, response);
             HttpSession session = request.getSession();
-            boolean errorStatus = (Boolean) session.getAttribute("loginError");
-            if (errorStatus) {
-                System.out.println("here");
-                //write error message to page
-                pw.println("<script>");
-                pw.println("document.getElementById('errorMsg').innerHTML = 'Invalid login credentials';");
-                pw.println("</script>");
+            Object loginError = session.getAttribute("loginError");
+            if(loginError != null) {
+                boolean errorStatus = (Boolean) session.getAttribute("loginError");
+                if (errorStatus) {
+                    System.out.println("here");
+                    //write error message to page
+                    pw.println("<script>");
+                    pw.println("document.getElementById('errorMsg').innerHTML = 'Invalid login credentials';");
+                    pw.println("</script>");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
