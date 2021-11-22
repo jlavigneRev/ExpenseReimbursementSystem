@@ -14,4 +14,11 @@ public class RequestServiceTest {
         assertEquals(true, requests.size() > 0);
         assertEquals(12.34, requests.get(0).getAmount());
     }
+
+    @Test
+    public void deleteRequestTest(){
+        //create request prior
+        RequestService requestService = new RequestService();
+        requestService.deleteRequest(11);
+    }
 }

@@ -30,6 +30,13 @@ public class RequestService {
         requestDao.closeCurrentSessionwithTransaction();
     }
 
+    public Request getRequestById(int id) {
+        requestDao.openCurrentSession();
+        Request request = requestDao.getRequestById(id);
+        requestDao.closeCurrentSession();
+        return request;
+    }
+
     public List<Request> getAllRequest() {
         requestDao.openCurrentSession();
         List<Request> requests = requestDao.getAllRequests();

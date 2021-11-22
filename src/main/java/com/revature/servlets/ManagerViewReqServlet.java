@@ -1,9 +1,6 @@
 package com.revature.servlets;
 
-import com.revature.Employee;
-import com.revature.JSHelper;
-import com.revature.Request;
-import com.revature.RequestService;
+import com.revature.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +20,7 @@ public class ManagerViewReqServlet extends HttpServlet {
         String email = (String) session.getAttribute("email");
         String role = (String) session.getAttribute("role");
         System.out.println("got email as " + email);
-        if(email != null && email!= "" && role == "manager") {
+        if (email != null && email != "" && role == "manager") {
             //include html
             try {
                 request.getRequestDispatcher("/managerNavBar.html").include(request, response);
@@ -32,32 +29,28 @@ public class ManagerViewReqServlet extends HttpServlet {
 
                 //populate tables
                 RequestService requestService = new RequestService();
-                Employee currUser = (Employee) session.getAttribute("currUser");
+                Manager currUser = (Manager) session.getAttribute("currUser");
                 List<Request> requestList = requestService.getAllRequest();
                 System.out.println(requestList);
                 ArrayList<String> lines;
                 pw.println("<script>");
                 for (Request req : requestList) {
                     //add to all table
-                    lines = JSHelper.addToTableJS(req, "allTable", true);
+                    lines = JSHelper.addToTableJS(req, "allTable", true, true);
                     for (String line : lines) {
                         pw.println(line);
                     }
                     if (req.isPending()) {
                         //add to pending table
-                        lines = JSHelper.addToTableJS(req, "pendingTable", true);
-                        for (String line : lines) {
-                            pw.println(line);
-                        }
-                    } else {
-                        //add to fulfilled table
-                        lines = JSHelper.addToTableJS(req, "fulfilledTable", true);
+                        lines = JSHelper.addToTableJS(req, "pendingTable", true, true);
                         for (String line : lines) {
                             pw.println(line);
                         }
                     }
                 }
                 pw.println("</script>");
+                System.out.println(currUser.getFirstName());
+                pw.println(JSHelper.updateNavUsernameJS(currUser.getFirstName()));
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Error including html to managerViewReqServlet");

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class JSHelper {
-    public static ArrayList<String> addToTableJS(Request req, String tableId, boolean isSelectable) {
+    public static ArrayList<String> addToTableJS(Request req, String tableId, boolean isSelectable, boolean hasEmpId) {
         ArrayList<String> js = new ArrayList<>();
         js.add("var table = document.getElementById('" + tableId + "');");
         js.add("var row = table.insertRow(1);");
@@ -22,6 +22,10 @@ public class JSHelper {
         js.add("cell4.innerHTML = '" + req.getAmount() + "';");
         js.add("cell5.innerHTML = '" + pendingText(req.isPending()) + "';");
         js.add("cell6.innerHTML = '" + dateText(req.getDateSubmitted()) + "';");
+        if(hasEmpId){
+            js.add("var cell7 = row.insertCell(6);");
+            js.add("cell7.innerHTML = '" + req.getEmployee().getEmpId() + "';");
+        }
         if(isSelectable){
             js.add("row.setAttribute('onclick', 'selectRow(this)')");
         }
@@ -38,5 +42,10 @@ public class JSHelper {
     public static String dateText(Date date){
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         return dateFormat.format(date);
+    }
+
+    public static String updateNavUsernameJS(String name){
+        System.out.println("Name passed in: " + name);
+        return "<script>document.getElementById('navUsername').innerText = '" + name + "';</script>";
     }
 }

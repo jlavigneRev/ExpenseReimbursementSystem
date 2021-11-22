@@ -38,25 +38,26 @@ public class EmployeeViewReqServlet extends HttpServlet {
                 pw.println("<script>");
                 for (Request req : requestList) {
                     //add to all table
-                    lines = JSHelper.addToTableJS(req, "allTable", false);
+                    lines = JSHelper.addToTableJS(req, "allTable", false, false);
                     for (String line : lines) {
                         pw.println(line);
                     }
                     if (req.isPending()) {
                         //add to pending table
-                        lines = JSHelper.addToTableJS(req, "pendingTable", false);
+                        lines = JSHelper.addToTableJS(req, "pendingTable", false ,false);
                         for (String line : lines) {
                             pw.println(line);
                         }
                     } else {
                         //add to fulfilled table
-                        lines = JSHelper.addToTableJS(req, "fulfilledTable", false);
+                        lines = JSHelper.addToTableJS(req, "fulfilledTable", false, false);
                         for (String line : lines) {
                             pw.println(line);
                         }
                     }
                 }
                 pw.println("</script>");
+                pw.println(JSHelper.updateNavUsernameJS(currUser.getFirstName()));
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Error including html to employeeViewRequestServlet");

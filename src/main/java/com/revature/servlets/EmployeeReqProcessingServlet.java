@@ -47,20 +47,8 @@ public class EmployeeReqProcessingServlet extends HttpServlet {
             receipt.setRequest(submittedRequest);
             receiptService.addReceipt(receipt);
 
-//            String base64String = Base64.getEncoder().encodeToString(byteArray);
-//            System.out.println("Base64 string:" + base64String);
-
-//            response.setContentType("text/html");
-//            PrintWriter pw = response.getWriter();
-//            pw.println("<html>");
-//            pw.println("<body>");
-//            pw.println("<h1>" + fileName + "</h1>");
-//            pw.println("<img id='ItemPreview' src=''>");
-//            pw.println("<script>");
-//            pw.println("document.getElementById('ItemPreview').src = 'data:image/jpeg;base64," + base64String + "'");
-//            pw.println("</script>");
-//            pw.println("</body>");
-//            pw.println("</html>");
+            //send back to landing
+            response.sendRedirect("employeeLanding");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -38,7 +38,6 @@ public class LoginValidationServlet extends HttpServlet {
             session.setAttribute("firstName", currUser.getFirstName());
             session.setAttribute("lastName", currUser.getLastName());
             session.setAttribute("currUser", currUser);
-            System.out.println(session.getAttribute("currUser"));
             //send to employee landing
             try {
                 response.sendRedirect("/project1/employeeLanding");
@@ -56,6 +55,7 @@ public class LoginValidationServlet extends HttpServlet {
             session.setAttribute("email", currUser.getEmail());
             session.setAttribute("firstName", currUser.getFirstName());
             session.setAttribute("lastName", currUser.getLastName());
+            session.setAttribute("currUser", currUser);
             //send to manager landing
             try {
                 response.sendRedirect("/project1/managerLanding");

@@ -36,10 +36,15 @@
             justify-content: space-between;
         }
 
+        #receiptBtn{
+            visibility: hidden;
+        }
+
         #approveCtrlContainer {
             box-sizing: border-box;
             text-align: center;
             padding: 15px;
+            visibility: hidden;
         }
 
         .nav-item>.nav-link {
@@ -72,6 +77,15 @@
             vertical-align: middle;
         }
 
+        #allTable{
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        tr{
+            height: 20px;
+        }
+
         #allTableHead>th {
             background-color: cadetblue;
         }
@@ -98,23 +112,20 @@
             <div id="inspectorPane" class="col-4">
                 <div id="requestInfoContainer" class="fluid-container">
                     <p> Use the this window to approve or deny selected requests.</p>
-                    <div id="idInfo">Request ID# 123</div>
-                    <div id="titleInfo">Title: 12345678901234567890</div>
-                    <div id="descriptionInfo">Description: This is a placeholder for the description of the
-                        reimbursment.
-                        This will tell what the funds were used for.
-                    </div>
-                    <div id="amountInfo">Amount: $10000.00</div>
-                    <div id="statusInfo">Status: Fulfilled</div>
-                    <div id="dateInfo">Date Submitted: 12/31/1999</div>
-                    <div id="employeeInfo">Employee: Jacob Steve Carl Marry (123)</div>
+                    <div id="idInfo">Select a request from the table!</div>
+                    <div id="titleInfo"></div>
+                    <div id="descriptionInfo"></div>
+                    <div id="amountInfo"></div>
+                    <div id="statusInfo"></div>
+                    <div id="dateInfo"></div>
+                    <div id="employeeInfo"></div>
                     <div id="receiptInfo">
-                        <button class="btn btn-primary btn-sm">View Receipt</button>
+                        <a href="receiptView" taget="_blank" id="receiptBtn" class="btn btn-primary btn-sm">View Receipt</a>
                     </div>
                 </div>
                 <div id="approveCtrlContainer">
-                    <button class="btn btn-success" onclick="approveRequest()">Approve</button>
-                    <button class="btn btn-danger" onclick="denyRequest()">Deny</button>
+                    <button class="btn btn-success" onclick="approveRequest(true)">Approve</button>
+                    <button class="btn btn-danger" onclick="approveRequest(false)">Deny</button>
                 </div>
             </div>
             <div id="container" class="col-8">
@@ -142,6 +153,7 @@
                                 <th>Amount</th>
                                 <th>Status</th>
                                 <th>Date</th>
+                                <th>Employee ID#</th>
                             </tr>
                         </table>
                     </div>
@@ -154,6 +166,7 @@
                                 <th>Amount</th>
                                 <th>Status</th>
                                 <th>Date</th>
+                                <th>Employee ID#</th>
                             </tr>
                         </table>
                     </div>
@@ -163,12 +176,12 @@
     </div>
 
     <script>
-        function approveRequest() {
+        async function approveRequest(approved) {
             var selected = document.getElementsByClassName("selected");
             if (selected.length > 0) {
                 var details = {
                     'reqId': selected[0].cells[0].innerText,
-                    'approved': 'true',
+                    'approved': approved,
                 };
 
                 var formBody = [];
@@ -179,13 +192,16 @@
                 }
                 formBody = formBody.join("&");
 
-                fetch('requestApproval', {
+                await fetch('requestApproval', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                     },
                     body: formBody
                 })
+
+                setTimeout(2000);
+                location.reload();
             }
 
         }
@@ -193,10 +209,10 @@
 
         function selectRow(row) {
             var selected = document.getElementsByClassName("selected");
-            if (selected.length > 0) {
+            if (selected.length > 0)
                 selected[0].classList.remove("selected");
-            }
             row.classList.add("selected");
+            document.getElementById("receiptBtn").style.visibility = 'visible';
             var selectedRowId = row.cells[0].innerText;
             document.getElementById('idInfo').innerHTML = 'Request ID#' + selectedRowId;
             document.getElementById('titleInfo').innerHTML = 'Title: ' + row.cells[1].innerText;
@@ -204,6 +220,9 @@
             document.getElementById('amountInfo').innerHTML = 'Amount: $' + row.cells[3].innerText;
             let status = row.cells[4].innerText;
             document.getElementById('statusInfo').innerHTML = 'Status: ' + status;
+            document.getElementById('dateInfo').innerHTML = 'Date: ' + row.cells[5].innerText;
+            document.getElementById('employeeInfo').innerHTML = 'Employee ID# ' + row.cells[6].innerText;
+            document.getElementById('receiptBtn').href = 'receiptView?receipt_req_id=' + selectedRowId;
             if (status == 'Pending')
                 document.getElementById('approveCtrlContainer').style.visibility = 'visible';
             else

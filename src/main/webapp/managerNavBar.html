@@ -20,6 +20,10 @@
         #loginIcon{
            height: 50px;
         }
+
+        #logoutBtn{
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -35,18 +39,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="managerLanding">Home</a>
+                        <a class="nav-link active" aria-current="page" href="managerLanding" style="border: 0px;">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="mangagerViewRequest">View Requests</a>
+                        <a class="nav-link active" aria-current="page" href="mangagerViewRequest" style="border: 0px;">View Requests</a>
                     </li>
-                        <a class="nav-link active" aria-current="page" href="about">About Us</a>
+                        <a class="nav-link active" aria-current="page" href="about" style="border: 0px;">About Us</a>
                     </li>
                 </ul>
             </div>
             <div id="loginDisplayContainer">
-                <img id="loginIcon" src="/img/loginIcon.png" alt="loginIcon"/>
-                <span>Username</span>
+                <img id="loginIcon" src="img/loginIcon.png" alt="loginIcon"/>
+                <span id="navUsername">Username</span>
+                <a href="logout" id="logoutBtn" class="btn btn-danger btn-sm">Logout</a>
             </div>
         </div>
     </nav>

@@ -10,10 +10,10 @@ public class EmployeeServiceTest {
     public void addEmployeeTest(){
         EmployeeService employeeService = new EmployeeService();
         Employee employee = new Employee();
-        employee.setEmail("gw@gmail.com");
-        employee.setFirstName("George");
-        employee.setLastName("Walter");
-        employee.setPassword("root");
+        employee.setEmail("wp@gmail.com");
+        employee.setFirstName("Will");
+        employee.setLastName("Peters");
+        employee.setPassword("wpdemo");
         employeeService.addEmployee(employee);
     }
 

@@ -16,7 +16,7 @@ public class ReceiptService {
         return id;
     }
 
-    public Receipt getReceiptByReqId(Serializable id) {
+    public Receipt getReceiptByReqId(int id) {
         receiptDao.openCurrentSession();
         Receipt receipt = receiptDao.getReceiptByReqId(id);
         receiptDao.closeCurrentSession();

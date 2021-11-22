@@ -13,17 +13,12 @@ public class ReceiptDaoImp extends DaoHelperImp implements ReceiptDao{
     }
 
     @Override
-    public Receipt getReceiptByReqId(Serializable id) {
-        String hql="Select rec.receiptId from Receipt rec where rec.reqId=:reqId";
+    public Receipt getReceiptByReqId(int reqId) {
+        String hql="from Receipt rec where rec.request.reqId=:reqId";
         Query query = getCurrentSession().createQuery(hql);
-        query.setParameter("reqId", id);
-        List result = query.list();
-        Iterator it = result.iterator();
-        if(it.hasNext()){
-            Receipt receipt = (Receipt) it.next();
-            return receipt;
-        }
-        return null;
+        query.setParameter("reqId", reqId);
+        List<Receipt> receipts = (List<Receipt>) query.list();
+        return receipts.get(0);
     }
 
     @Override

@@ -32,7 +32,7 @@
                 <form action="employeeReqProcessing" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="inputTitle" class="form-label">Title</label>
-                        <input type="text" id="inputTitle" class="form-control" name="title" aria-describedby="titleHelpBlock">
+                        <input type="text" id="inputTitle" class="form-control" name="title" aria-describedby="titleHelpBlock" required>
                         <div id="titleHelpBlock" class="form-text">
                             Descriptive title of reimbursment, must be under 20 characters long.
                         </div>
@@ -41,7 +41,7 @@
                     <div class="mb-3">
                         <label for="inputDescription" class="form-label">Description</label>
                         <input type="text" id="inputDescription" class="form-control" name="description"
-                            aria-describedby="descriptionHelpBlock">
+                            aria-describedby="descriptionHelpBlock" required>
                         <div id="descriptionHelpBlock" class="form-text">
                             Description of how funds were utilized.
                         </div>
@@ -50,19 +50,19 @@
                     <div class="mb-3">
                         <label for="inputAmount" class="form-label">Reimbursment Amount ($)</label>
                         <input type="number" name="amount" min="0.01" step="0.01" max="10000" id="inputAmount" class="form-control"
-                            placeholder="0.00" aria-describedby="amountHelpBlock">
+                            placeholder="0.00" aria-describedby="amountHelpBlock" required>
                         <div id="amountHelpBlock" class="form-text">
                             Amount requested for reimbursment in US Dollars.
                         </div>
                     </div>
 
-                    <label for="inputReceipt" class="form-label">Copy of Receipt</label>
+                    <label for="inputReceipt" class="form-label" required>Copy of Receipt</label>
                     <div class="input-group mb-3">
                         <input type="file" name="receipt" accept="image/png, image/jpg, image/jpeg" class="form-control" id="inputReciept">
                     </div>
 
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="acknowledge">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="acknowledge" required>
                         <label class="form-check-label" for="exampleCheck1">I acknowledge all information entered is accurate.</label>
                       </div>
 
